@@ -16,7 +16,7 @@ export const signUp = async (req, res) => {
             return res.status(400).json({ message: "Password must be grater than 6 characters!" })
         }
 
-        let hashPassword = bcrypt.hash(password, 10)
+        let hashPassword = await bcrypt.hash(password, 10)
 
         const user = await User.create({
             name, email, password: hashPassword
