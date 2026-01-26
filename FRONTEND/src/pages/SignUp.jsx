@@ -15,17 +15,21 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [err, setErr] = useState("")
+    const [loading, setLoading] = useState(false)
 
     async function submitHandle(e) {
         e.preventDefault()
+        setErr("")
+        setLoading(true)
         try {
 
             const result = await axios.post(`${serverUrl}/api/auth/signup`, { name, email, password }, { withCredentials: true })
             console.log(result);
-            setErr("")
+            setLoading(false)
         } catch (error) {
             console.log(error)
             setErr(error.response.data.message)
+            setLoading(false)
         }
 
 
@@ -49,7 +53,7 @@ const SignUp = () => {
 
                 {err.length > 0 && <p className='text-red-500 text-xl'>*{err}</p>}
 
-                <button className='bg-blue-500 text-white px-6 py-3 text-xl rounded-full cursor-pointer font-semibold active:scale-95 '>SignUp</button>
+                <button className='bg-blue-500 text-white px-6 py-3 text-xl rounded-full cursor-pointer font-semibold active:scale-95 ' disabled={loading}>{loading ? "Loading..." : "Sign Up"}</button>
                 <p className='text-xl cursor-pointer' onClick={() => navigate("/signin")} >Already have account! <span className='text-blue-400 '>Sign In</span></p>
 
             </form>
