@@ -9,7 +9,7 @@ import axios from "axios"
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const { serverUrl } = useContext(userDataContext)
+    const { serverUrl, userData, setUserData } = useContext(userDataContext)
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -25,9 +25,12 @@ const SignUp = () => {
 
             const result = await axios.post(`${serverUrl}/api/auth/signup`, { name, email, password }, { withCredentials: true })
             console.log(result);
+            setUserData(result.data)
             setLoading(false)
+            navigate("/customize")
         } catch (error) {
             console.log(error)
+            setUserData(null)
             setErr(error.response.data.message)
             setLoading(false)
         }
