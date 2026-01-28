@@ -9,7 +9,7 @@ const Customize = () => {
     return (
         <div className='w-full h-screen bg-linear-to-t from-[#101010c4] to-[#030349a2] flex justify-center items-center flex-col p-5' >
             <h1 className='text-2xl mb-10 font-semibold'>Select your Assistent Image</h1>
-            <div className='w-full max-w-225 flex justify-center items-center flex-wrap gap-5 '>
+            <div className='w-full max-w-225 flex justify-center items-center flex-wrap gap-5 mb-10 '>
                 <Card image={image1} />
                 <Card image={image2} />
                 <Card image={image3} />
@@ -19,6 +19,7 @@ const Customize = () => {
                     <RiImageAddLine className='h-8 w-8 ' />
                 </div>
             </div>
+            <button className='bg-blue-500 text-white px-6 py-3 text-xl rounded-full cursor-pointer font-semibold active:scale-95 '>Next</button>
         </div>
     )
 }
