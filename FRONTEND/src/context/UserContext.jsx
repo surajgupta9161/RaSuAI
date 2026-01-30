@@ -6,8 +6,11 @@ import { useEffect } from 'react'
 const UserContext = ({ children }) => {
     const serverUrl = "http://localhost:8000"
     const [userData, setUserData] = useState(null)
+    const [frontEndImage, setFrontEndImage] = useState(null)
+    const [backEndImage, setBackEndImage] = useState(null)
+    const [selectedImage, setSelectedImage] = useState(null)
     const value = {
-        serverUrl, userData, setUserData
+        serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage
     }
 
     const handleCurrentUser = async () => {
