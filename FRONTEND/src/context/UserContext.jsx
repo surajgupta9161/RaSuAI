@@ -10,9 +10,7 @@ const UserContext = ({ children }) => {
     const [backEndImage, setBackEndImage] = useState(null)
     const [selectedImage, setSelectedImage] = useState(null)
     const [selectedImage2, setSelectedImage2] = useState(null)
-    const value = {
-        serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage, selectedImage2, setSelectedImage2
-    }
+
 
     const handleCurrentUser = async () => {
         try {
@@ -22,6 +20,19 @@ const UserContext = ({ children }) => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const geminiResponse = async (command) => {
+        try {
+            const result = await axios.post(`${serverUrl}/api/user/asktoassistant`, { command }, { withCredentials: true })
+            return result.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const value = {
+        serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage, selectedImage2, setSelectedImage2, geminiResponse
     }
 
     useEffect(() => {
