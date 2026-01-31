@@ -3,8 +3,8 @@ import fs from "fs"
 const uploadOnCloudinary = async (filepath) => {
     cloudinary.config({
         cloud_name: process.env.CLOUD_NAME,
-        api_key: process.env.CLOUD_API_SECRET,
-        api_secret: process.env.CLOUD_API_KEY
+        api_key: process.env.CLOUD_API_KEY,
+        api_secret: process.env.CLOUD_API_SECRET
     });
     try {
         const uploadOnCloudinary = await cloudinary.uploader

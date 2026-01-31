@@ -9,8 +9,9 @@ const UserContext = ({ children }) => {
     const [frontEndImage, setFrontEndImage] = useState(null)
     const [backEndImage, setBackEndImage] = useState(null)
     const [selectedImage, setSelectedImage] = useState(null)
+    const [selectedImage2, setSelectedImage2] = useState(null)
     const value = {
-        serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage
+        serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage, selectedImage2, setSelectedImage2
     }
 
     const handleCurrentUser = async () => {
