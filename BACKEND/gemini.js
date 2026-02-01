@@ -37,7 +37,7 @@ const geminiResponse = async (command, assistantName, userName) => {
         - "get_month": if user asks for current month .
 
         Important:
-        - Use "{author name}" agar koi puche tumhe kisne banaya
+        - Use "${assistantName}" agar koi puche tumhe kisne banaya
         - Only response with the JSON object, nothing else. 
         
         now your userInput- ${command}
