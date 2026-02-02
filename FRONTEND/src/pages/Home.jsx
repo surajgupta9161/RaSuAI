@@ -23,15 +23,55 @@ const Home = () => {
         recognition.continuous = true
         recognition.lang = "en-US"
 
+        // recognition.interimResults = false;
+        // let isProcessing = false; // 🔥 ADD THIS
+
+        let isCallingAPI = false;
+
         recognition.onresult = async (e) => {
+            // if (isProcessing) return; // 🔥 ADD
             const lastIndex = e.results.length - 1;
             const transcript = e.results[lastIndex][0].transcript;
 
-            const data = await geminiResponse(transcript)
-            console.log(data)
+            // if (!result.isFinal || isCallingAPI) return;`
 
-        }
+            isCallingAPI = true;
+
+            // if (!transcript || transcript.length < 3) return;
+            console.log("heard:", transcript);
+            // isProcessing = true;
+
+            // if (transcript.toLowerCase().includes(userData.assistantName.toLowerCase())) {}
+            try {
+                const data = await geminiResponse(transcript);
+                console.log(data);
+            } catch (error) {
+                console.log("gemini response error:", error)
+            }
+
+        };
+
+        setTimeout(() => {
+            isCallingAPI = false;
+        }, 3000); // 3 sec gap
+
+        // setTimeout(() => {
+        //     isProcessing = false; // 🔥 ADD (cooldown)
+        // }, 2000);
+
+        recognition.onend = () => {
+            console.log("Mic stopped... restarting");
+            recognition.start(); // 🔥 VERY IMPORTANT
+        };
+
+        // recognition.onerror = (err) => {
+        //     console.error("Speech error:", err);
+        // };
+
         recognition.start()
+        // return () => {
+        //     recognition.stop();
+        // };
     }, [])
 
     return (
