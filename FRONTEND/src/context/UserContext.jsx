@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useRef } from 'react'
 export const userDataContext = createContext()
 import axios from "axios"
 import { useState } from 'react'
@@ -22,12 +22,18 @@ const UserContext = ({ children }) => {
         }
     }
 
+    let isProcessing = useRef(false);
+
     const geminiResponse = async (command) => {
+        if (isProcessing.current) return null;
+        isProcessing.current = true;
         try {
             const result = await axios.post(`${serverUrl}/api/user/asktoassistant`, { command }, { withCredentials: true })
             return result.data
-        } catch (error) {
-            console.log(error)
+        } finally {
+            setTimeout(() => {
+                isProcessing.current = false;
+            }, 1500);
         }
     }
 
