@@ -17,6 +17,11 @@ const Home = () => {
         }
     }
 
+    const speak = (text) => {
+        const utterence = new SpeechSynthesisUtterance(text)
+        window.speechSynthesis.speak(utterence)
+    }
+
     useEffect(() => {
         const speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
         const recognition = new speechRecognition()
@@ -32,6 +37,7 @@ const Home = () => {
             if (transcript.toLowerCase().includes(userData.assistantName.toLowerCase())) {
                 const data = await geminiResponse(transcript);
                 console.log(data);
+                speak(data.response)
             }
 
 
@@ -45,6 +51,9 @@ const Home = () => {
         recognition.start()
 
     }, [])
+
+
+
 
     return (
         <div className='w-full h-screen bg-linear-to-t from-[#1d1c1c96] to-[#09094f7e] flex justify-center items-center flex-col p-5 relative' >

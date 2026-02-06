@@ -22,20 +22,20 @@ const UserContext = ({ children }) => {
         }
     }
 
-    let isProcessing = useRef(false);
+
 
     const geminiResponse = async (command) => {
-        if (isProcessing.current) return null;
-        isProcessing.current = true;
         try {
             const result = await axios.post(`${serverUrl}/api/user/asktoassistant`, { command }, { withCredentials: true })
             return result.data
-        } finally {
-            setTimeout(() => {
-                isProcessing.current = false;
-            }, 1500);
+        } catch (error) {
+            console.log(error)
         }
     }
+
+
+
+
 
     const value = {
         serverUrl, userData, setUserData, backEndImage, setBackEndImage, frontEndImage, setFrontEndImage, selectedImage, setSelectedImage, selectedImage2, setSelectedImage2, geminiResponse
